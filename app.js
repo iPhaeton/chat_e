@@ -4,6 +4,7 @@ var path = require('path');
 var config = require("config");
 var log = require("libs/log")(module);
 var error = require("error");
+var mongoose = require("libs/mongoose");
 
 var app = express();
 
@@ -20,6 +21,22 @@ app.use(express.bodyParser());
 //app.use(express.json());
 app.use(express.cookieParser());
 //app.use(express.urlencoded());
+
+var MongoStore = require("connect-mongo")(express);
+
+app.use(express.session({
+    secret: config.get("session:secret"),
+    key: config.get("session:key"),
+    cookie: config.get("session:cookie"),
+    store: new MongoStore({mongooseConnection: mongoose.connection})
+}));
+
+app.use(function (req, res, next) {
+    /*if (req.session.numberOfVisits) req.session.numberOfVisits++;
+    else req.session.numberOfVisits = 1;*/
+    req.session.numberOfVisits = req.session.numberOfVisits + 1 || 1;
+    res.send("Visits:" + req.session.numberOfVisits);
+});
 
 app.use(require("middleware/sendHttpError"));
 
