@@ -1,0 +1,8 @@
+<%layout('layout/page') -%>
+<% block("title", "Hello") -%>
+<%if (user) {%>
+<% block("main", "Hello, " + user.get("username")) -%>
+<%}%>
+<% block("scripts", "<script src='js/clientChat.js'></script>")%>
+
+<p class="lead">This is going to be a chat</p>

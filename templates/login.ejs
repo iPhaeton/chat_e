@@ -1,0 +1,25 @@
+<%layout('layout/page') -%>
+<% block("title", "Register and sign in") -%>
+<% block("main", "Enter your name and password. If user with this is not found, a new account will be created") -%>
+<% block("scripts", "<script src='js/clientLogin.js'></script>")%>
+
+<form class="form-horizontal login-form" name="login-form">
+    <div class="form-group">
+        <label for="input-username" class="col-lg-2 control-label">Name</label>
+        <div class="col-lg-10">
+            <input name="username" value="Name" type="text" class="form-control" id="input-username" placeholder="Name"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="input-password" class="col-lg-2 control-label">Password</label>
+        <div class="col-lg-10">
+            <input name="password" value="Password" type="text" class="form-control" id="input-password" placeholder="Password"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-lg-pffset-2 col-lg-10">
+            <button type="submit" class="btn btn-primary" data-loading-text="Sending...">Sign In</button>
+            <span class="help-block error"></span>
+        </div>
+    </div>
+</form>
