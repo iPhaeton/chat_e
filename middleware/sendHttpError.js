@@ -8,6 +8,8 @@ module.exports = function (req, res, next) {
         
         if (res.req.headers["x-request-with"] === "XMLHttpRequest") {
             res.json(error);
+        } else if (req.method === "POST") {
+            res.json(error);
         } else {
             res.render("error", {error: error});
         };

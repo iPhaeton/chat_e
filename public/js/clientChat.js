@@ -1,16 +1,20 @@
-/**
- * Created by Phaeton on 12.06.2016.
- */
-var logout = document.getElementById("logout");
-logout.onclick = function (event) {
-    $('<form method=POST action=/logout>').submit();
-    return false;
-};
+var socket = io.connect();
 
-/*window.onbeforeunload = function () {
-    $('<form method=POST action=/logout>').submit(function () {
+var form = $("#room form");
+var ul = $("#room ul");
 
+form.submit(function () {
+    var input = $(this).find(":input");
+    var text = input.val();
+    input.val("");
+    
+    socket.emit("message", text, function (data) {
+        $("<li>", {text: text}).appendTo(ul);
     });
+    
     return false;
-    if (!confirm("???")) return false;
-};*/
+});
+
+socket.on("message", function (text) {
+    $("<li>", {text: text}).appendTo(ul);
+})
