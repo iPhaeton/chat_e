@@ -3,7 +3,7 @@
 <%if (user) {%>
 <% block("main", "Hello, " + user.get("username")) -%>
 <%}%>
-<% block("scripts", "<script src='/socket.io/socket.io.js'></script>" +
+<% block("scripts", "<script src='/vendor/bower_components/socket.io-client/socket.io.js'></script>" +
                     "<script src='js/clientLogout.js'></script>" +
                     "<script src='js/clientChat.js'></script>")%>
 
@@ -12,4 +12,7 @@
     <form>
         <input class="form-control" autocomplete="off" autofocus placeholder="Message">
     </form>
+</div>
+<div id="stat">
+    <ul></ul>
 </div>
