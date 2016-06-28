@@ -1,7 +1,9 @@
 <%layout('layout/page') -%>
 <% block("title", "Register and sign in") -%>
 <% block("main", "Enter your name and password. If user with this is not found, a new account will be created") -%>
-<% block("scripts", "<script src='js/clientLogin.js'></script>")%>
+<% block("scripts", "<script src='js/clientLogin.js'></script>" +
+                    "<script src='js/clientLogout.js'></script>" +
+                    "<script src='js/clientChat.js'></script>")%>
 
 <form class="form-horizontal login-form" name="login-form">
     <div class="form-group">

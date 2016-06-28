@@ -12,7 +12,7 @@ function sendMessage () {
     input.val("");
     
     socket.emit("message", text, function (data) {
-        $("<li>", {text: text}).appendTo(ul);
+        $("<li>", {text: "me> " + text}).appendTo(ul);
     });
     
     return false;
@@ -27,8 +27,8 @@ function printStatus(text) {
 };
 
 socket
-    .on("message", function (text) {
-        printMessage(text)
+    .on("message", function (username, text) {
+        printMessage(username + "> " + text);
     })
     .on("connect", function () {
         printStatus("Connected");
@@ -39,6 +39,9 @@ socket
         printStatus("Connection lost");
         form.off("submit", sendMessage);
         input.prop("disabled", true);
+    })
+    .on("logout", function () {
+        location.href = "/";
     })
     .on("reconnect_failed", function () {
         alert("Connection is lost forever");
